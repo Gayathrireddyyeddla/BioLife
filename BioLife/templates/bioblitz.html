@@ -11,8 +11,16 @@
 </head>
 <body>
     <h1>Welcome to the Bioblitz Page</h1>
-    <p>This is the Bioblitz view.</p>
         <img src="/media/identifications_finduser_name.jpg" alt="Find User">
+
+    <h2>Enter Project Slug</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="projectslug" placeholder="Project Slug" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    
 
 </body>
 </html>

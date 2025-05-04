@@ -25,6 +25,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('identifications/', views.identifications, name='identifications'),
     path('bioblitz/', views.bioblitz, name='bioblitz'),
+    path('bioblitz_results/', views.bioblitz_results, name='bioblitz_results'),
 ]
 
 # Add static file serving during development

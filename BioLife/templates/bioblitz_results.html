@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bioblitz Results</title>
+    <style>
+        img {
+            width: 50%;
+            height: auto;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .screenshot-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    </style>
+    <!-- Load html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <button class="screenshot-button" onclick="delayedScreenshot()">Download Screenshot</button>
+
+    <h1><b>Bioblitz Results for {{ projectslug }}</b></h1>
+    <ul>
+        <li>Total Observations in Place: {{ total_observations_place }}</li>
+        <li>Place Total Observers: {{ Place_Total_Observers }}</li>
+        <li>Place Total Species: {{ Place_Total_Species }}</li>
+        <li>User Increase Percent: {{ User_Increase_Percent }}%</li>
+        <li>Observation Increase Percent: {{ Observation_Increase_Percent }}%</li>
+        <li>Species Increase Percent: {{ Species_Increase_Percent }}%</li>
+        <li>New Users: {{ New_Users }}</li>
+        <li>New Users Percentage: {{ New_Users_Percentage }}%</li>
+    </ul>
+
+    <h3>Graphs</h3>
+    <img src="{{ graph_paths.0 }}" alt="Observations Graph">
+    <img src="{{ graph_paths.1 }}" alt="Species Graph">
+
+    <script>
+        function delayedScreenshot() {
+            setTimeout(() => {
+                document.fonts.ready.then(() => {
+                    html2canvas(document.body, {
+                        useCORS: true,
+                        scrollY: -window.scrollY,
+                        scale: 2,
+                        windowWidth: document.documentElement.scrollWidth,
+                        windowHeight: document.documentElement.scrollHeight
+                    }).then(canvas => {
+                        const link = document.createElement('a');
+                        link.download = 'bioblitz_results_screenshot.png';
+                        link.href = canvas.toDataURL();
+                        link.click();
+                    });
+                });
+            }, 1000); // delay to ensure everything renders
+        }
+    </script>
+</body>
+</html>
