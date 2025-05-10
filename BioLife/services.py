@@ -16,6 +16,7 @@ from django.conf import settings
 def get_obs(user, max_id):
     url = f"https://api.inaturalist.org/v1/identifications?current=any&user_id={user}&per_page=200&order_by=id&order=asc&id_above={max_id}"
     response = requests.get(url)
+    print(response)
     results = response.json().get("results", [])
     return pd.json_normalize(results)
 
@@ -33,6 +34,9 @@ def fetch_all_obs(user):
             if len(obs) < 200:
                 break
             pbar.update(1)
+    if not all_data:
+        print("No data found for this user.")
+        return pd.DataFrame()
     return pd.concat(all_data, ignore_index=True)
 
 # Prepare and clean the raw data
@@ -136,6 +140,11 @@ def calculate_coverage(inatid):
 def process_username(user):
     print(f"\nFetching iNaturalist identifications for user: {user}\n")
     raw_data = fetch_all_obs(user)
+    if raw_data.empty:
+        return {
+            "error": "No data found for the given username.",
+            "username": user
+        }
     inatid = prepare_data(raw_data)
 
     total_ids = len(inatid)

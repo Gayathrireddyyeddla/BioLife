@@ -14,7 +14,12 @@ def process_projectslug(project_slug):
 
     # Total Observations
     obs_response = requests.get(f"https://api.inaturalist.org/v1/observations?project_id={project_slug}&per_page=0")
+
+    if obs_response.status_code != 200:
+        print(f"Error fetching data for project {project_slug}: {obs_response.status_code}")
+        return {"error": "Failed to fetch data from iNaturalist API."}
     total_observations = obs_response.json()['total_results']
+    print(f"Total Observations: {total_observations}")
 
     # Observers
     all_observers = []

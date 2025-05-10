@@ -16,6 +16,9 @@ def identifications(request):
         username = request.POST.get('username')
         logger.debug(f"POST request received with username: {username}")
         result = process_username(username)
+        if 'error' in result:
+            print(f"Error processing username: {result['error']}")
+            return render(request, 'error_identifications.html', {'message': result['error'], 'username': username})
         return render(request, 'identifications.html', {
             'username': username,
             'total_ids': result['total_ids'],
@@ -33,6 +36,8 @@ def bioblitz(request):
         projectslug = request.POST.get('projectslug')
         logger.debug(f"POST request received with projectslug: {projectslug}")
         result = process_projectslug(projectslug)
+        if 'error' in result:
+            return render(request, 'error_bioblitz.html', {'message': result['error'], 'project_slug': projectslug})
         return render(request, 'bioblitz_results.html', {
             'projectslug': projectslug,
             'total_observations_place': result['total_observations_place'],
