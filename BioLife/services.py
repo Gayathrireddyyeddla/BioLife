@@ -155,6 +155,14 @@ def process_username(user):
     user_plot_url = plot_users(inatid, username=user)
     unique_acres = calculate_coverage(inatid)
 
+    # Schedule deletion of generated graph images after rendering
+    def delete_images():
+        os.remove(os.path.join(settings.MEDIA_ROOT, f"{user}_identifications_overtime.png"))
+        os.remove(os.path.join(settings.MEDIA_ROOT, f"{user}_identifications_for_users_overtime.png"))
+
+    from threading import Timer
+    Timer(5.0, delete_images).start()
+
     return {
         "total_ids": total_ids,
         "unique_users": unique_users,

@@ -116,6 +116,15 @@ def process_projectslug(project_slug):
     obs_graph_url = f"{settings.MEDIA_URL}bioblitz/{project_slug}/project_observations.png"
     species_graph_url = f"{settings.MEDIA_URL}bioblitz/{project_slug}/project_species.png"
 
+    # Schedule deletion of generated graph images and subfolder after rendering
+    def delete_images_and_folder():
+        os.remove(os.path.join(media_dir, 'project_observations.png'))
+        os.remove(os.path.join(media_dir, 'project_species.png'))
+        os.rmdir(media_dir)  # Remove the subfolder for the project_slug
+
+    from threading import Timer
+    Timer(5.0, delete_images_and_folder).start()
+
     return {
         "project_slug": project_slug,
         "graph_paths": [obs_graph_url, species_graph_url],
