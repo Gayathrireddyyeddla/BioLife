@@ -138,36 +138,37 @@ def calculate_coverage(inatid):
 
 # Main function to run the entire workflow
 def process_username(user):
-    print(f"\nFetching iNaturalist identifications for user: {user}\n")
-    raw_data = fetch_all_obs(user)
-    if raw_data.empty:
+    try:
+        print(f"\nFetching iNaturalist identifications for user: {user}\n")
+        raw_data = fetch_all_obs(user)
+        if raw_data.empty:
+            return {
+                "error": "No data found for the given username.",
+                "username": user
+            }
+
+        inatid = prepare_data(raw_data)
+
+        total_ids = len(inatid)
+        unique_users = inatid["ob_user_id"].nunique()
+        volunteer_hours = total_ids // 30
+
+        id_plot_url = plot_identifications(inatid, username=user)
+        user_plot_url = plot_users(inatid, username=user)
+        unique_acres = calculate_coverage(inatid)
+
+        return {
+            "total_ids": total_ids,
+            "unique_users": unique_users,
+            "volunteer_hours": volunteer_hours,
+            "estimated_coverage_acres": round(unique_acres),
+            "id_plot_url": id_plot_url,
+            "user_plot_url": user_plot_url
+        }
+
+    except Exception as e:
+        print(f"Error processing user '{user}': {e}")
         return {
             "error": "No data found for the given username.",
             "username": user
         }
-    inatid = prepare_data(raw_data)
-
-    total_ids = len(inatid)
-    unique_users = inatid["ob_user_id"].nunique()
-    volunteer_hours = total_ids // 30
-
-    id_plot_url = plot_identifications(inatid, username=user)
-    user_plot_url = plot_users(inatid, username=user)
-    unique_acres = calculate_coverage(inatid)
-
-    # Schedule deletion of generated graph images after rendering
-    def delete_images():
-        os.remove(os.path.join(settings.MEDIA_ROOT, f"{user}_identifications_overtime.png"))
-        os.remove(os.path.join(settings.MEDIA_ROOT, f"{user}_identifications_for_users_overtime.png"))
-
-    from threading import Timer
-    Timer(5.0, delete_images).start()
-
-    return {
-        "total_ids": total_ids,
-        "unique_users": unique_users,
-        "volunteer_hours": volunteer_hours,
-        "estimated_coverage_acres": round(unique_acres),
-        "id_plot_url": id_plot_url,
-        "user_plot_url": user_plot_url
-    }

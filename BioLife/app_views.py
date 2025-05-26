@@ -3,6 +3,7 @@ import logging
 from django.http import HttpResponse
 from .services import process_username
 from .biobiltz_service import process_projectslug
+from django.views.defaults import server_error
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -57,3 +58,10 @@ def bioblitz_results(request):
     result = request.session.get('bioblitz_result', {})
     logger.debug(f"Bioblitz Results: {result}")
     return render(request, 'bioblitz_results.html', {'result': result})
+
+# Update error handling to redirect to error.html
+def custom_error_view(request, exception=None):
+    return render(request, 'error.html', {'message': 'An unexpected error occurred.'})
+
+# Update urlpatterns to include custom error handler
+handler500 = 'BioLife.app_views.custom_error_view'

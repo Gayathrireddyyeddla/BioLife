@@ -1,48 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Bioblitz Results</title>
     <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        li {
+            padding-left: 20px;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: #4CAF50;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 40px;
+            text-align: center;
+        }
+
         img {
-            width: 50%;
+            width: 100%;
             height: auto;
             display: block;
-            margin-bottom: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
         }
+
         .screenshot-button {
             position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 10px 15px;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
+            font-weight: bold;
             cursor: pointer;
             z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .screenshot-button:hover {
+            background-color: #388e3c;
         }
     </style>
-    <!-- Load html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <button class="screenshot-button" onclick="delayedScreenshot()">Download Screenshot</button>
 
-    <h1><b>Bioblitz Results for {{ projectslug }}</b></h1>
-    <ul>
-        <li>Total Observations in Place: {{ total_observations_place }}</li>
-        <li>Place Total Observers: {{ Place_Total_Observers }}</li>
-        <li>Place Total Species: {{ Place_Total_Species }}</li>
-        <li>User Increase Percent: {{ User_Increase_Percent }}%</li>
-        <li>Observation Increase Percent: {{ Observation_Increase_Percent }}%</li>
-        <li>Species Increase Percent: {{ Species_Increase_Percent }}%</li>
-        <li>New Users: {{ New_Users }}</li>
-        <li>New Users Percentage: {{ New_Users_Percentage }}%</li>
-    </ul>
+    <div class="container">
+        <h1>Bioblitz Results for <strong>{{ projectslug }}</strong></h1>
+        
+        <ul>
+            <li>Total Observations in Place: {{ total_observations_place }}</li>
+            <li>Place Total Observers: {{ Place_Total_Observers }}</li>
+            <li>Place Total Species: {{ Place_Total_Species }}</li>
+            <li>User Increase Percent: {{ User_Increase_Percent }}%</li>
+            <li>Observation Increase Percent: {{ Observation_Increase_Percent }}%</li>
+            <li>Species Increase Percent: {{ Species_Increase_Percent }}%</li>
+            <li>New Users: {{ New_Users }}</li>
+            <li>New Users Percentage: {{ New_Users_Percentage }}%</li>
+        </ul>
 
-    <h3>Graphs</h3>
-    <img src="{{ graph_paths.0 }}" alt="Observations Graph">
-    <img src="{{ graph_paths.1 }}" alt="Species Graph">
+        <h3>Graphs</h3>
+        <img src="{{ graph_paths.0 }}" alt="Observations Graph">
+        <img src="{{ graph_paths.1 }}" alt="Species Graph">
+    </div>
 
     <script>
         function delayedScreenshot() {
@@ -61,7 +126,7 @@
                         link.click();
                     });
                 });
-            }, 1000); // delay to ensure everything renders
+            }, 1000);
         }
     </script>
 </body>

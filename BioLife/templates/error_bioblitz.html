@@ -1,23 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Error - Bioblitz</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
+
+        .container {
+            max-width: 600px;
+            padding: 30px 40px;
+            background: white;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #c0392b;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
         .error-message {
-            color: red;
-            font-size: 20px;
+            color: #e74c3c;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        strong {
+            color: #2c3e50;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <h1>Error</h1>
-    <p class="error-message">{{ message }}</p>
-    <p>Project Slug: <strong>{{ project_slug }}</strong></p>
-    <a href="/bioblitz/">Go Back</a>
+    <div class="container">
+        <h1>Error</h1>
+        <p class="error-message">{{ message }}</p>
+        <p>Project Slug: <strong>{{ project_slug }}</strong></p>
+        <a href="/bioblitz/">← Go Back</a>
+    </div>
 </body>
 </html>

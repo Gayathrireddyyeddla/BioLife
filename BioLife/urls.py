@@ -19,6 +19,9 @@ from django.contrib import admin
 from BioLife import app_views as views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import handler500
+
+handler500 = 'BioLife.app_views.custom_error_view'
 
 urlpatterns = [
     path('admin/', admin.site.urls),

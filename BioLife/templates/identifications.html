@@ -1,43 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Identifications</title>
+    <meta charset="UTF-8">
+    <title>Identifications Report</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 40px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+
+        .stats {
+            margin-bottom: 30px;
+        }
+
+        .stats h2 {
+            margin: 10px 0;
+            font-weight: normal;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
         .screenshot-button {
             position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 10px 15px;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
             background-color: #007BFF;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
+            font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
             z-index: 1000;
         }
-        img {
-            width: 50%;
-            height: auto;
-            display: block;
-            margin-bottom: 20px;
+
+        .screenshot-button:hover {
+            background-color: #0056b3;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: #ddd;
+            margin: 40px 0;
         }
     </style>
 </head>
 <body>
     <button class="screenshot-button" onclick="downloadScreenshot()">Download Screenshot</button>
 
-    <h1>Welcome, {{ username }}</h1>
-    <h2>Total IDs: {{ total_ids }}</h2>
-    <h2>Unique Users: {{ unique_users }}</h2>
-    <h2>Volunteer Hours: {{ volunteer_hours }}</h2>
-    <h2>Estimated Coverage (Acres): {{ estimated_coverage_acres }}</h2>
+    <div class="container">
+        <h1>Welcome, {{ username }}</h1>
 
-    <h3>Identifications Plot</h3>
-    <img src="{{ id_plot_path }}" alt="Identifications Plot">
+        <div class="stats">
+            <h2>Total Identifications: {{ total_ids }}</h2>
+            <h2>Unique Users Engaged: {{ unique_users }}</h2>
+            <h2>Volunteer Hours: {{ volunteer_hours }}</h2>
+            <h2>Estimated Coverage (Acres): {{ estimated_coverage_acres }}</h2>
+        </div>
 
-    <h3>User Plot</h3>
-    <img src="{{ user_plot_path }}" alt="User Plot">
+        <hr>
+
+        <h3>Identifications Timeline</h3>
+        <img src="{{ id_plot_path }}" alt="Identifications Plot">
+
+        <h3>User Engagement Timeline</h3>
+        <img src="{{ user_plot_path }}" alt="User Plot">
+    </div>
 
     <script>
         function downloadScreenshot() {
@@ -56,7 +109,7 @@
                         link.click();
                     });
                 });
-            }, 1000); // Wait for DOM and fonts to fully load
+            }, 1000);
         }
     </script>
 </body>
