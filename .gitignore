@@ -24,9 +24,6 @@ dist/
 # Media files
 media/
 
-# Static files
-static/
-
 # VS Code settings
 .vscode/
 

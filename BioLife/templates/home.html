@@ -1,11 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Home</title>
+    <meta charset="UTF-8">
+    <title>Welcome to BioLife</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Welcome to BioLife</h1>
-    <button onclick="location.href='/identifications/'">Identifications</button>
-    <button onclick="location.href='/bioblitz/'">Bioblitz</button>
+    <div class="container">
+        <img src="{% static 'images/Lab_Logo.png' %}" alt="Lab Logo" class="logo">
+
+        <h1>Welcome to the iNaturalist Engagement Reporting Platform!</h1>
+
+        <p>
+            This platform, developed by the University of Florida’s Global Ecology Research Group, provides visual insights into engagement activity on iNaturalist. Engagement is tracked in two primary ways:
+        </p>
+
+        <ol>
+            <li><strong>Identifications</strong> – insights into how users contribute by identifying observations made by others.</li>
+            <li><strong>Bioblitz Participation</strong> – insights into programming efforts that facilitate engagement through organized iNaturalist projects (e.g., bioblitzes).</li>
+        </ol>
+
+        <h3>How to Use the Platform:</h3>
+
+        <ul>
+            <li><strong>For Identification Insights:</strong><br>
+                Select the “Identifications” option and enter your iNaturalist username. The platform will generate a report showing your total number of identifications, the number of people you've engaged with, and a timeline of your identification activity.
+                <em>Note: Graphics may take time depending on your activity level.</em>
+            </li>
+            <li><strong>For Bioblitz Insights:</strong><br>
+                Select the “Bioblitz” option and enter the relevant project ID. The resulting report will show how the bioblitz contributed to observations and species in a specific place.
+                <em>Note: Optimized for place-based bioblitzes.</em>
+            </li>
+        </ul>
+
+        <h3>To get started, choose which engagement graphic you'd like to view:</h3>
+
+        <div class="buttons">
+            <button onclick="location.href='/identifications/'">Identifications</button>
+            <button onclick="location.href='/bioblitz/'">Bioblitz</button>
+        </div>
+    </div>
 </body>
 </html>

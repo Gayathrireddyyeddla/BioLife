@@ -1,26 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Bioblitz</title>
-    <style>
-        img {
-            width: 50%;
-            height: auto;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Welcome to the Bioblitz Page</h1>
-        <img src="/media/identifications_finduser_name.jpg" alt="Find User">
+    <div class="container">
+        <!-- Lab Logo -->
+        <img src="{% static 'images/Lab_Logo.png' %}" alt="Lab Logo" class="logo">
 
-    <h2>Enter Project Slug</h2>
-    <form method="post">
-        {% csrf_token %}
-        <input type="text" name="projectslug" placeholder="Project Slug" required>
-        <button type="submit">Submit</button>
-    </form>
+        <!-- Page Title -->
+        <h1>Welcome to the Bioblitz Page</h1>
 
-    
+        <!-- Optional graphic/image -->
+        <img src="{% static 'identifications_finduser_name.jpg' %}" alt="Bioblitz Graphic" class="responsive-img">
 
+        <!-- Form Title -->
+        <h2>Enter Project Slug</h2>
+
+        <!-- Input Form -->
+        <form method="post" class="form-center">
+            {% csrf_token %}
+            <input type="text" name="projectslug" placeholder="Project Slug" required class="input-field">
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
 </body>
 </html>

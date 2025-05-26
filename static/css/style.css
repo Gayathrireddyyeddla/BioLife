@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 20px auto;
+    max-width: 150px;
+}
+
+h1, h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #111;
+}
+
+ol, ul {
+    padding-left: 20px;
+    line-height: 1.6;
+}
+
+h3 {
+    margin-top: 30px;
+    color: #000;
+}
+
+.buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button, .submit-button {
+    background-color: #1d72b8;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px;
+}
+
+button:hover, .submit-button:hover {
+    background-color: #155d8c;
+}
+
+.form-center {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.input-field {
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    font-size: 16px;
+    margin: 15px auto;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.responsive-img {
+    width: 80%;
+    max-width: 500px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}

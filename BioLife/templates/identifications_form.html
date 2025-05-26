@@ -1,17 +1,22 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Identifications</title>
-    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Enter your username</h1>
-    <form method="post">
-        {% csrf_token %}
-        <input type="text" name="username" placeholder="Username" required>
-        <button type="submit">Submit</button>
-    </form>
-    <!-- <img src="/static/identifications_finduser_name.jpg" alt="Find User"> -->
+    <div class="container">
+        <img src="{% static 'images/Lab_Logo.png' %}" alt="Lab Logo" class="logo">
+
+        <h1>Enter your iNaturalist Username</h1>
+
+        <form method="post" class="form-center">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required class="input-field">
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
