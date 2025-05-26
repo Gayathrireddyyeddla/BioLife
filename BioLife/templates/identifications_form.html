@@ -30,6 +30,8 @@
             {% csrf_token %}
             <input type="text" name="username" placeholder="Username" required class="input-field">
             <br>
+            <input type="text" name="location" placeholder="Location" required class="input-field">
+            <br>
             <button type="submit" class="submit-button" style="margin-top: 10px;">Submit</button>
         </form>
         <div id="loading-message" class="loading">Loading, please wait...</div>

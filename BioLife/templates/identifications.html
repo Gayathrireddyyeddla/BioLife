@@ -1,74 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+        {% load static %}  
     <meta charset="UTF-8">
     <title>Identifications Report</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 40px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-
-        .stats {
-            margin-bottom: 30px;
-        }
-
-        .stats h2 {
-            margin: 10px 0;
-            font-weight: normal;
-        }
-
-        img {
-            width: 100%;
-            height: auto;
-            display: block;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
-
-        .screenshot-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 12px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-        }
-
-        .screenshot-button:hover {
-            background-color: #0056b3;
-        }
-
-        hr {
-            border: none;
-            height: 1px;
-            background: #ddd;
-            margin: 40px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/identifications.css' %}">
 </head>
 <body>
     <button class="screenshot-button" onclick="downloadScreenshot()">Download Screenshot</button>

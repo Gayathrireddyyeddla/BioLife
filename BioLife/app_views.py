@@ -15,8 +15,9 @@ def home(request):
 def identifications(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        logger.debug(f"POST request received with username: {username}")
-        result = process_username(username)
+        location = request.POST.get('location')
+        logger.debug(f"POST request received with username: {username} and location: {location}")
+        result = process_username(username, location)
         if 'error' in result:
             print(f"Error processing username: {result['error']}")
             return render(request, 'error_identifications.html', {'message': result['error'], 'username': username})

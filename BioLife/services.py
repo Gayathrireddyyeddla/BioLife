@@ -13,20 +13,20 @@ import os
 from django.conf import settings
 
 # API call to get a page of identifications
-def get_obs(user, max_id):
-    url = f"https://api.inaturalist.org/v1/identifications?current=any&user_id={user}&per_page=200&order_by=id&order=asc&id_above={max_id}"
+def get_obs(user,location, max_id):
+    url = f"https://api.inaturalist.org/v1/identifications?current=any&user_id={user}&place_id={location}&per_page=200&order_by=id&order=asc&id_above={max_id}"
     response = requests.get(url)
     print(response)
     results = response.json().get("results", [])
     return pd.json_normalize(results)
 
 # Fetch all identifications using pagination
-def fetch_all_obs(user):
+def fetch_all_obs(user,location):
     all_data = []
     max_id = 0
     with tqdm(total=1, desc="Fetching pages") as pbar:
         while True:
-            obs = get_obs(user, max_id)
+            obs = get_obs(user,location, max_id)
             if obs.empty:
                 break
             all_data.append(obs)
@@ -137,10 +137,10 @@ def calculate_coverage(inatid):
     return unique_acres
 
 # Main function to run the entire workflow
-def process_username(user):
+def process_username(user,location):
     try:
         print(f"\nFetching iNaturalist identifications for user: {user}\n")
-        raw_data = fetch_all_obs(user)
+        raw_data = fetch_all_obs(user,location)
         if raw_data.empty:
             return {
                 "error": "No data found for the given username.",
