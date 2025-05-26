@@ -5,6 +5,20 @@
     <meta charset="UTF-8">
     <title>Bioblitz</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .loading {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+            color: blue;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function showLoading() {
+            document.getElementById('loading-message').style.display = 'block';
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -21,11 +35,12 @@
         <h2>Enter Project Slug</h2>
 
         <!-- Input Form -->
-        <form method="post" class="form-center">
+        <form method="post" class="form-center" onsubmit="showLoading()">
             {% csrf_token %}
             <input type="text" name="projectslug" placeholder="Project Slug" required class="input-field">
             <button type="submit" class="submit-button">Submit</button>
         </form>
+        <div id="loading-message" class="loading">Loading, please wait...</div>
     </div>
 </body>
 </html>
