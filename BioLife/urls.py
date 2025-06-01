@@ -20,6 +20,7 @@ from BioLife import app_views as views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import handler500
+from .views import add_click
 
 handler500 = 'BioLife.app_views.custom_error_view'
 
@@ -29,6 +30,7 @@ urlpatterns = [
     path('identifications/', views.identifications, name='identifications'),
     path('bioblitz/', views.bioblitz, name='bioblitz'),
     path('bioblitz_results/', views.bioblitz_results, name='bioblitz_results'),
+    path('add-click/', add_click, name='add_click'),
 ]
 
 # Add static file serving during development

@@ -1,0 +1,7 @@
+.loading {
+    display: none;
+    text-align: center;
+    font-size: 18px;
+    color: blue;
+    margin-top: 20px;
+}

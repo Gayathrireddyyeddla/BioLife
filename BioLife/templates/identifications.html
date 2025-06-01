@@ -30,7 +30,22 @@
     </div>
 
     <script>
+        async function addClickEntry() {
+            const response = await fetch('/add-click/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ button_name: 'identifications' })
+            });
+            if (!response.ok) {
+                console.error('Failed to add click entry');
+            }
+        }
+
         function downloadScreenshot() {
+            addClickEntry();
             setTimeout(() => {
                 document.fonts.ready.then(() => {
                     html2canvas(document.body, {
