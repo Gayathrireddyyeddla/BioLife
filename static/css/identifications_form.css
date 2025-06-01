@@ -1,0 +1,14 @@
+.loading {
+    display: none;
+    text-align: center;
+    font-size: 18px;
+    color: blue;
+    margin-top: 20px;
+}
+
+.responsive-img {
+    display: block;
+    margin: 0 auto; /* Centers the image horizontally */
+    max-width: 100%; /* Makes the image responsive */
+    height: auto; /* Maintains aspect ratio */
+}

@@ -14,7 +14,10 @@ from django.conf import settings
 
 # API call to get a page of identifications
 def get_obs(user,location, max_id):
-    url = f"https://api.inaturalist.org/v1/identifications?current=any&user_id={user}&place_id={location}&per_page=200&order_by=id&order=asc&id_above={max_id}"
+    if location!='0':
+        url = f"https://api.inaturalist.org/v1/identifications?current=any&user_id={user}&place_id={location}&per_page=200&order_by=id&order=asc&id_above={max_id}"
+    else:
+        url= f"https://api.inaturalist.org/v1/identifications?current=any&user_id={user}&per_page=200&order_by=id&order=asc&id_above={max_id}"
     response = requests.get(url)
     print(response)
     results = response.json().get("results", [])
