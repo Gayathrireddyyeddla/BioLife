@@ -6,14 +6,30 @@
     <title>Bioblitz Results</title>
     <link rel="stylesheet" href="{% static 'css/bioblitz_results.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- 
+    <style>
+        /* Optional smooth transitions for toggle effects */
+        #statsContainer,
+        #obsGraphContainer,
+        #speciesGraphContainer {
+            transition: all 0.3s ease;
+        }
+
+        .screenshot-button,
+        .toggle-button {
+            margin: 10px 0;
+        }
+    </style> -->
 </head>
 <body>
     <button class="screenshot-button" onclick="downloadScreenshot()">Download Screenshot</button>
 
     <div class="container">
-        <h1>Welcome, {{projectslug}}</h1>
+        <h1>Welcome, {{ projectslug }}</h1>
 
-        <div class="stats">
+        <!-- Toggle for Stats -->
+        <button class="toggle-button" onclick="toggleVisibility('statsContainer')">Toggle Stats</button>
+        <div id="statsContainer" class="stats">
             <h2>Total Observations in Place: {{ total_observations_place }}</h2>
             <h2>Place Total Observers: {{ Place_Total_Observers }}</h2>
             <h2>Place Total Species: {{ Place_Total_Species }}</h2>
@@ -26,14 +42,33 @@
 
         <hr>
 
+        <!-- Toggle for Observations Graph -->
         <h3>Observations Graph</h3>
-        <img src="{{ graph_paths.0 }}" alt="Observations Graph">
+        <button class="toggle-button" onclick="toggleVisibility('obsGraphContainer')">Toggle Observations Graph</button>
+        <div id="obsGraphContainer">
+            <img src="{{ graph_paths.0 }}" alt="Observations Graph">
+        </div>
 
+        <!-- Toggle for Species Graph -->
         <h3>Species Graph</h3>
-        <img src="{{ graph_paths.1 }}" alt="Species Graph">
+        <button class="toggle-button" onclick="toggleVisibility('speciesGraphContainer')">Toggle Species Graph</button>
+        <div id="speciesGraphContainer">
+            <img src="{{ graph_paths.1 }}" alt="Species Graph">
+        </div>
     </div>
 
     <script>
+        // Toggle visibility by element ID
+        function toggleVisibility(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === 'none') {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        }
+
+        // Track screenshot click
         async function addClickEntry() {
             const response = await fetch('/add-click/', {
                 method: 'POST',
@@ -48,6 +83,7 @@
             }
         }
 
+        // Download screenshot
         function downloadScreenshot() {
             addClickEntry();
             setTimeout(() => {

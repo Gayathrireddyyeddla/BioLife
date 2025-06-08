@@ -9,26 +9,60 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+venv/
+ENV/
+.venv/
+.ENV/
 build/
 dist/
 *.egg-info/
 *.egg
 
-# Django stuff:
+# Django stuff
 *.log
 *.pot
 *.pyc
 *.pyo
 *.sqlite3
+db.sqlite3
+db.sqlite3-journal
+local_settings.py
 
-# Media files
+# Migrations (optional)
+*/migrations/__pycache__/
+*/migrations/*.py[cod]
+# Uncomment to ignore all migration files
+# */migrations/*.py
+
+#media files
+/media/
 media/
-
-# VS Code settings
-.vscode/
-
-# macOS files
-.DS_Store
 
 # Environment variables
 .env
+.env.*
+
+#media files
+Icon?
+Desktop.ini
+
+# PyCharm
+.idea/
+
+# Test coverage
+htmlcov/
+.coverage
+.tox/
+.nox/
+.cache
+.pytest_cache/
+
+# Node (if using JS tools)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Docker (optional)
+*.pid
+docker-compose.override.yml

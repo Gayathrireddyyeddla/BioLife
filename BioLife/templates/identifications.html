@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        {% load static %}  
+    {% load static %}
     <meta charset="UTF-8">
     <title>Identifications Report</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/identifications.css' %}">
+
+    <!-- <style>
+        /* Smooth transitions for toggleable elements */
+        #statsContainer,
+        #idPlotContainer,
+        #userPlotContainer {
+            transition: all 0.3s ease;
+        }
+
+        .screenshot-button,
+        .toggle-button {
+            margin: 10px 0;
+        }
+    </style> -->
 </head>
 <body>
     <button class="screenshot-button" onclick="downloadScreenshot()">Download Screenshot</button>
@@ -13,7 +27,9 @@
     <div class="container">
         <h1>Welcome, {{ username }}</h1>
 
-        <div class="stats">
+        <!-- Toggle for Stats -->
+        <button class="toggle-button" onclick="toggleVisibility('statsContainer')">Toggle Stats</button>
+        <div id="statsContainer" class="stats">
             <h2>Total Identifications: {{ total_ids }}</h2>
             <h2>Unique Users Engaged: {{ unique_users }}</h2>
             <h2>Volunteer Hours: {{ volunteer_hours }}</h2>
@@ -22,14 +38,33 @@
 
         <hr>
 
+        <!-- Identification Graph -->
         <h3>Identifications Timeline</h3>
-        <img src="{{ id_plot_path }}" alt="Identifications Plot">
+        <button class="toggle-button" onclick="toggleVisibility('idPlotContainer')">Toggle Identification Graph</button>
+        <div id="idPlotContainer">
+            <img src="{{ id_plot_path }}" alt="Identifications Plot">
+        </div>
 
+        <!-- User Engagement Graph -->
         <h3>User Engagement Timeline</h3>
-        <img src="{{ user_plot_path }}" alt="User Plot">
+        <button class="toggle-button" onclick="toggleVisibility('userPlotContainer')">Toggle User Engagement Graph</button>
+        <div id="userPlotContainer">
+            <img src="{{ user_plot_path }}" alt="User Plot">
+        </div>
     </div>
 
     <script>
+        // Toggle element visibility by ID
+        function toggleVisibility(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === 'none') {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        }
+
+        // Send click log to server
         async function addClickEntry() {
             const response = await fetch('/add-click/', {
                 method: 'POST',
@@ -44,6 +79,7 @@
             }
         }
 
+        // Capture and download screenshot
         function downloadScreenshot() {
             addClickEntry();
             setTimeout(() => {

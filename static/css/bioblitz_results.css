@@ -76,3 +76,34 @@ hr {
 .screenshot-button:hover {
     background-color: #388e3c;
 }
+
+.toggle-button {
+    background-color: #007BFF; /* Blue background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    padding: 12px 20px; /* Add padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Inline block for layout */
+    font-size: 16px; /* Font size */
+    margin: 10px 0; /* Margin */
+    cursor: pointer; /* Pointer cursor */
+    border-radius: 6px; /* Rounded corners */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Shadow */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.toggle-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+#statsContainer,
+#obsGraphContainer,
+#speciesGraphContainer {
+    transition: all 0.3s ease;
+}
+
+.screenshot-button,
+.toggle-button {
+    margin: 10px 0;
+}
