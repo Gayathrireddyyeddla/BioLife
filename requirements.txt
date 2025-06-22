@@ -1,0 +1,9 @@
+Django
+matplotlib
+requests
+pandas
+seaborn
+geopandas
+shapely
+numpy
+tqdm

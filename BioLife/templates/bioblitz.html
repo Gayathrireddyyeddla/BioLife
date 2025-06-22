@@ -33,12 +33,12 @@
         <img src="{% static 'identifications_finduser_name.jpg' %}" alt="Bioblitz Graphic" class="responsive-img">
 
         <!-- Form Title -->
-        <h2>Enter Project Slug</h2>
+        <h2>Enter Project ID</h2>
 
         <!-- Input Form -->
         <form method="post" class="form-center" onsubmit="showLoading()">
             {% csrf_token %}
-            <input type="text" name="projectslug" placeholder="Project Slug" required class="input-field">
+            <input type="text" name="projectslug" placeholder="Project ID" required class="input-field">
             <button type="submit" class="submit-button">Submit</button>
         </form>
         <div id="loading-message" class="loading">Loading, please wait...</div>
